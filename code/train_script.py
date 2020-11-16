@@ -158,6 +158,7 @@ if __name__ == "__main__":
     parser.add_argument("--deepernet", type=int, help="Index to use one of the deeper model", default=0, required=False)
     parser.add_argument("--batch_size", type=int, help="Batch size", default=2, required=False)
     parser.add_argument("--lr", type=float, help="Learning rate", default=1e-3, required=False)
+    parser.add_argument("--parallel", action='store_true', help="Train on multiple GPUs", default=False, required=False)
     args = parser.parse_args()
     
     # Possible deeper models
