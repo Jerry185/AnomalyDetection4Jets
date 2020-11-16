@@ -190,17 +190,23 @@ if __name__ == "__main__":
 
     if args.metalayer:
         print("Using metalayer model")
-        model = models.GNNAutoEncoder().to(device)
+        model = models.GNNAutoEncoder()
     elif args.vae:
         print("Using VAE")
-        model = models.EdgeNetVAE(input_dim=input_dim, big_dim=big_dim, hidden_dim=hidden_dim).to(device)
+        model = models.EdgeNetVAE(input_dim=input_dim, big_dim=big_dim, hidden_dim=hidden_dim)
     elif args.embed:
-        model = models.EdgeNetEmbed(input_dim=input_dim, big_dim=big_dim, hidden_dim=hidden_dim).to(device)
+        model = models.EdgeNetEmbed(input_dim=input_dim, big_dim=big_dim, hidden_dim=hidden_dim)
     elif args.deepernet != -1:
-        model = deep_models[args.deepernet](input_dim=input_dim, big_dim=big_dim, hidden_dim=hidden_dim).to(device)
+        model = deep_models[args.deepernet](input_dim=input_dim, big_dim=big_dim, hidden_dim=hidden_dim)
     else:
         print("Using default EdgeConv")
-        model = models.EdgeNet(input_dim=input_dim, big_dim=big_dim, hidden_dim=hidden_dim).to(device)
+        model = models.EdgeNet(input_dim=input_dim, big_dim=big_dim, hidden_dim=hidden_dim)
+
+    if args.parallel and torch.cuda.device_count() > 1:
+        print(f'Using {torch.cuda.device_count()} gpus')
+        model = torch_geometric.nn.DataParallel(model)
+    model.to(device)
+
     optimizer = torch.optim.Adam(model.parameters(), lr = lr)
 
     def collate(items): # collate function for data loaders (transforms list of lists to list)
