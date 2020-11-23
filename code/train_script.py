@@ -2,6 +2,7 @@ import torch
 import tqdm
 import math
 import torch.nn as nn
+import torch_geometric
 from torch_geometric.nn import EdgeConv, global_mean_pool
 from torch_geometric.data import Data, DataLoader, DataListLoader, Batch
 from torch.utils.data import random_split
