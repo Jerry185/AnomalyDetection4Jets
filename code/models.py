@@ -293,6 +293,7 @@ class EdgeNetDeeper4(nn.Module):
                                    nn.Linear(big_dim, big_dim),
                                    nn.ReLU(),
                                    nn.Linear(big_dim, big_dim*2)
+        )
 
         self.batchnorm = nn.BatchNorm1d(input_dim)
 
