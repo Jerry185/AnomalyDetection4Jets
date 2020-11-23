@@ -161,8 +161,8 @@ if __name__ == "__main__":
     parser.add_argument("--parallel", action='store_true', help="Train on multiple GPUs", default=False, required=False)
     args = parser.parse_args()
     
-    # Possible deeper models
-    deep_models = [models.EdgeNetDeeper, models.EdgeNetDeeper2, models.EdgeNetDeeper3, models.EdgeNetDeeper4]
+    # Other models
+    deep_models = [models.EdgeNetDeeper, models.EdgeNetDeeper2, models.EdgeNetDeeper3, models.EdgeNetDeeper4, models.EdgeNetDeeper5, models.AE]
     
     # data and specifications
     if args.box_num == 0:
